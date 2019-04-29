@@ -1,0 +1,26 @@
+---
+- name: Load and commit configuration data on a device running Junos OS
+  hosts: jswitches
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Checking NETCONF connectivity
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 22
+        timeout: 5
+
+    - name: Merge configuration data from a file and commit
+      juniper_junos_config:
+        load: "merge"
+        format: "text"
+        src: "build_conf/{{ inventory_hostname }}/junos-config.conf"
+        comment: "Configuring op script with Ansible"
+      register: response
+
+    - name: Print the response
+      debug:
+        var: response
