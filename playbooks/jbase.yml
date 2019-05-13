@@ -1,0 +1,18 @@
+---
+hostname: 'steves-ex-2200'
+ntp: 192.111.144.114
+mgt_ip: 192.168.1.10/24
+int_subnet: 192.168.20.0/24
+dmz_subnet: 192.168.30.0/24
+int_vlan: 20
+dmz_vlan: 30
+default_route: 0.0.0.0/0
+default_gateway: 192.168.1.254
+bgp_neighbor: 1.1.1.1
+users:
+  - username: steves
+    uid: 2000
+    fullname: SteveS
+  - username: ssms27
+    uid: 2001
+    fullname: Steve

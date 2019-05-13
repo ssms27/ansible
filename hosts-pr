@@ -1,0 +1,7 @@
+# hosts-pr
+
+[jswitches]
+sw1 ansible_host=192.168.1.10
+
+[aswitches]
+sw2 ansible_host=192.168.1.152

@@ -1,0 +1,106 @@
+
+system {
+    host-name steves-ex-2200;
+    root-authentication {
+        encrypted-password "$5$clau99WY$KVO/Bwj8EgZTsUUWLNuMDiaG0FCVaAuFywmVEo64Q88"; ## SECRET-DATA
+    }
+    login {
+        class superduper {
+            permissions all;
+        }
+        {% for username in users %}
+        user {{ username }} {
+            full-name username;
+            uid {{ uid }};{%  endfor %}
+            class super-user;
+            authentication {
+                encrypted-password "$5$0o0wBn0J$g7hsbfYmYD6.2DV414VLd1/jEhFGcEma/JrjT/KkOp3"; ## SECRET-DATA
+            }
+        }
+    }
+    services {
+        ssh;
+        netconf {
+            ssh;
+        }
+    }
+    syslog {
+        file sys-logs {
+            authorization any;
+        }
+    }
+    ntp {
+        source-address {{ ntp }};
+    }
+}
+interfaces {
+    ge-0/0/0 {
+        unit 0 {
+            family ethernet-switching;
+        }
+    }
+    me0 {
+        unit 0 {
+            family inet {
+                address {{ mgt_ip }};
+            }
+        }
+    }
+    vlan {
+        unit 0 {
+            family inet;
+        }
+        unit {{ vlan_int }} {
+            family inet {
+                address {{ int_subnet }};
+            }
+        }
+        unit {{ vlan_dmz }} {
+            family inet {
+                address {{ dmz_subnet }};
+            }
+        }
+    }
+}
+routing-options {
+    static {
+        route {{ default_route }} next-hop {{ default_gateway }};
+    }
+}
+protocols {
+    bgp {
+        group providers {
+            peer-as {{ as_num }};
+            neighbor {{ bgp_neighbor }};
+        }
+    }
+    igmp-snooping {
+        vlan all;
+    }
+    rstp;
+    lldp {
+        interface all;
+    }
+    lldp-med {
+        interface all;
+    }
+}
+ethernet-switching-options {
+    storm-control {
+        interface all;
+    }
+}
+vlans {
+    default {
+        l3-interface vlan.0;
+    }
+    v{{ vlan_int }} {
+        vlan-id {{ vlan_int }};
+    }
+    v{{ vlan_dmz }} {
+        vlan-id {{ vlan_dmz }};
+    }
+}
+poe {
+    interface all;
+}
