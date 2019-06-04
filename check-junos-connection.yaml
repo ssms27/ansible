@@ -1,0 +1,15 @@
+---
+- name: run show version on remote devices
+  hosts: switches
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Checking NETCONF connectivity
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        port: 830
+        timeout: 5
+        #commands: show version
