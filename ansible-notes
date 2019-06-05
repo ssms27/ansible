@@ -2,7 +2,9 @@
  a. vagrant box add cumuluscommunity/cumulus-vx
  b. mkdir vagrant
  c. vagrant init
- d. edit vagrant config file and add: config.vm.box = "CumulusCommunity/cumulus-vx"
+ d. edit vagrant config file and add:
+   I. config.vm.box = "CumulusCommunity/cumulus-vx"
+   II. config.vm.network "public_network"
  e. vagrant up (look for vagrant defaults on init. This includes username, private-key)
  f. vagrant ssh
  g. vagrant destroy
