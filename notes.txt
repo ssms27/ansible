@@ -1,0 +1,38 @@
+1. Starting Cumulus via Vagrant
+ a. vagrant box add cumuluscommunity/cumulus-vx
+ b. mkdir vagrant
+ c. vagrant init
+ d. edit vagrant config file and add:
+   I. config.vm.box = "CumulusCommunity/cumulus-vx"
+   II. config.vm.network "public_network"
+ e. vagrant up (look for vagrant defaults on init. This includes username, private-key)
+ f. vagrant ssh
+ g. vagrant destroy
+
+
+#note
+See for a demo: https://github.com/CumulusNetworks/cldemo-nclu-ansible
+
+ cumulus@cumulus:/etc$ history
+    1  clear
+    2  sudo adduser xxxx
+    3  sudo users
+    5  sudo cat /etc/passwd
+    6  sudo vi /etc/hostname
+    7  cat /etc/hostname
+    8  ls /etc/
+    9  vi /etc/resolve.conf
+   10  sudo vi /etc/resolve.conf
+   11  ping yahoo.com
+   13  sudo vi /etc/issues.net
+   14  hwclock
+   15  sudo dpkg-reconfigure tzdata
+   16  clear
+   17  sudo hwclock
+   19  sudo vi /etc/ntp.conf
+   22  sudo ntpd -q
+   23  sudo vi /etc/network/interfaces
+   26  sudo vi /etc/profile
+   27  ifconfig
+   28  sudo vi /etc/network/interfaces
+   29  sudo cl-rctl running-config |grep integrated
