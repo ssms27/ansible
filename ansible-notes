@@ -10,6 +10,9 @@
  g. vagrant destroy
 
 
+#note
+See for a demo: https://github.com/CumulusNetworks/cldemo-nclu-ansible
+
  cumulus@cumulus:/etc$ history
     1  clear
     2  sudo adduser xxxx
